@@ -76,7 +76,7 @@ namespace BoosterCreator {
 			return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
 		}
 
-		internal static string FormatStaticResponse(string response) => Commands.FormatStaticResponse(response);
+		internal static string FormatStaticResponse(string response) => ArchiSteamFarm.Steam.Interaction.Commands.FormatStaticResponse(response);
 		internal static string FormatBotResponse(Bot bot, string response) => bot.Commands.FormatBotResponse(response);
 	}
 }
