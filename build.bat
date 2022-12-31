@@ -21,7 +21,7 @@ if exist out rmdir /Q /S out
 
 rem release generic version
 
-dotnet publish -c "Release" -f "net6.0" -o "out/generic" "/p:LinkDuringPublish=false"
+dotnet publish -c "Release" -f "net7.0" -o "out/generic" "/p:LinkDuringPublish=false"
 mkdir .\out\%CurrDirName%
 copy .\out\generic\%CurrDirName%.dll .\out\%CurrDirName%
 rem comment section below (downto :zip label) if you don't want to include documentation 
@@ -40,7 +40,7 @@ rmdir /Q /S out\%CurrDirName%
 rem release generic-netf version
 rem comment section below if you don't target netf ASF version
 
-dotnet publish -c "Release" -f "net48" -o "out/generic-netf"
+dotnet publish -c "Release" -f "net481" -o "out/generic-netf"
 mkdir .\out\%CurrDirName%
 copy .\out\generic-netf\%CurrDirName%.dll .\out\%CurrDirName%
 rem comment section below (downto :zipnetf label) if you don't want to include documentation 

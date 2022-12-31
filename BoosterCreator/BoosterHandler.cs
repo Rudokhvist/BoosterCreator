@@ -120,21 +120,27 @@ namespace BoosterCreator {
 					if (bi.Unavailable) {
 
 						//God, I hate this shit. But for now I have no idea how to predict/enforce correct format.
-						string timeFormat;
-						if (!string.IsNullOrWhiteSpace(bi.AvailableAtTime) && char.IsDigit(bi.AvailableAtTime.Trim()[0])) {
-							timeFormat = "d MMM @ h:mmtt";
-						} else {
-							timeFormat = "MMM d @ h:mmtt";
+
+						List<string> timeFormats = new(){
+							"d MMM @ h:mmtt",
+							"MMM d @ h:mmtt",
+							"d MMM, @ h:mmtt"
+						};
+
+						DateTime availableAtTime = DateTime.MinValue;
+						foreach (string timeFormat in timeFormats) {
+							if (DateTime.TryParseExact(bi.AvailableAtTime, timeFormat, new CultureInfo("en-US"), DateTimeStyles.None, out availableAtTime)) {
+								break;
+							}
+						}
+						if (availableAtTime == DateTime.MinValue) {
+							bot.ArchiLogger.LogGenericInfo("Unable to parse time \"" + bi.AvailableAtTime + "\", please report this.");
+							availableAtTime = DateTime.Now.AddHours(8); //fallback to 8 hours in case of error
 						}
 
 						response.AppendLine(Commands.FormatBotResponse(bot, "Crafting booster from " + gameID.Key.ToString() + " will be available at time: " + bi.AvailableAtTime));
 						bot.ArchiLogger.LogGenericInfo(Commands.FormatBotResponse(bot, "Crafting booster from " + gameID.Key.ToString() + " is not available now"));
-						//Wait until specified time
-						if (DateTime.TryParseExact(bi.AvailableAtTime, timeFormat, new CultureInfo("en-US"), DateTimeStyles.None, out DateTime availableAtTime)) {
-						} else {
-							bot.ArchiLogger.LogGenericInfo("Unable to parse time \"" + bi.AvailableAtTime + "\", please report this.");
-							availableAtTime = DateTime.Now.AddHours(8); //fallback to 8 hours in case of error
-						}
+
 						if (gameID.Value.HasValue) { //if source is timer, not command
 							gameIDs[gameID.Key] = availableAtTime;//convertedTime;
 							bot.ArchiLogger.LogGenericInfo(Commands.FormatBotResponse(bot, "Next attempt to make booster from " + gameID.Key.ToString() + " is planned at " + gameIDs[gameID.Key]!.Value.ToShortDateString() + " " + gameIDs[gameID.Key]!.Value.ToShortTimeString()));
