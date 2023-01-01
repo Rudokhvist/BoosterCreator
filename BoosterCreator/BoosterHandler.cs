@@ -124,7 +124,8 @@ namespace BoosterCreator {
 						List<string> timeFormats = new(){
 							"d MMM @ h:mmtt",
 							"MMM d @ h:mmtt",
-							"d MMM, @ h:mmtt"
+							"d MMM, yyyy @ h:mmtt",
+							"MMM d, yyyy @ h:mmtt",
 						};
 
 						DateTime availableAtTime = DateTime.MinValue;
