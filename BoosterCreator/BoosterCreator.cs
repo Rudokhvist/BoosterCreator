@@ -15,7 +15,7 @@ namespace BoosterCreator {
 		public Version Version => typeof(BoosterCreator).Assembly.GetName().Version ?? new Version("0");
 
 		public Task OnLoaded() {
-			ASF.ArchiLogger.LogGenericInfo("BoosterCreator ASF Plugin by Out (https://steamcommunity.com/id/outzzz) | fork by Ryzhehvost");
+			ASF.ArchiLogger.LogGenericInfo("BoosterCreator ASF Plugin by Out (https://steamcommunity.com/id/outzzz) | fork by Rudokhvist");
 			return Task.CompletedTask;
 		}
 
