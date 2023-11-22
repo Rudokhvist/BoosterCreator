@@ -7,7 +7,7 @@ This plugin was made by [Outzzz](https://github.com/Outzzz), but after some time
 As title says, aim of this plugin is giving a user an easy way to create booster packs from gems, both by command and automatically.
 
 ## Installation
-- download .zip file from [latest release](https://github.com/Ryzhehvost/BoosterCreator/releases/latest), in most cases you need `BoosterCreator.zip`, but if you use ASF-generic-netf.zip (you really need a strong reason to do that) download `BoosterCreator-netf.zip`.
+- download .zip file from [latest release](https://github.com/Rudokhvist/BoosterCreator/releases/latest), in most cases you need `BoosterCreator.zip`, but if you use ASF-generic-netf.zip (you really need a strong reason to do that) download `BoosterCreator-netf.zip`.
 - unpack downloaded .zip file to `plugins` folder inside your ASF folder.
 - (re)start ASF, you should get a message indicating that plugin loaded successfully. 
 
@@ -34,7 +34,7 @@ You can get support for this plugin in https://steamcommunity.com/groups/Ryzhepl
 Как ясно из заголовка, цель этого плагина - дать пользователю возможность создавать наборы карточек из самоцветов, как по команде, так и автоматически.
 
 ## Установка
-- скачайте файл .zip из [последнего релиза](https://github.com/Ryzhehvost/BoosterCreator/releases/latest), в большинстве случаев вам нужен файл `BoosterCreator.zip`, не если вы по какой-то причине пользуетесь ASF-generic-netf.zip (а для этого нужны веские причины) - скачайте `BoosterCreator-netf.zip`.
+- скачайте файл .zip из [последнего релиза](https://github.com/Rudokhvist/BoosterCreator/releases/latest), в большинстве случаев вам нужен файл `BoosterCreator.zip`, не если вы по какой-то причине пользуетесь ASF-generic-netf.zip (а для этого нужны веские причины) - скачайте `BoosterCreator-netf.zip`.
 - распакуйте скачанный файл .zip в папку `plugins` внутри вашей папки с ASF.
 - (пере)запустите ASF, вы должны получить сообщение что плагин успешно загружен. 
 
@@ -47,4 +47,4 @@ You can get support for this plugin in https://steamcommunity.com/groups/Ryzhepl
 
 Помощь по этому плагину вы можете получить в https://steamcommunity.com/groups/Ryzheplugins (или просто используйте раздел issues)
 
-![downloads](https://img.shields.io/github/downloads/Ryzhehvost/BoosterCreator/total.svg?style=social)
+![downloads](https://img.shields.io/github/downloads/Rudokhvist/BoosterCreator/total.svg?style=social)
