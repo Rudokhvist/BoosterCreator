@@ -10,9 +10,10 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2;
-using Newtonsoft.Json;
 using JetBrains.Annotations;
 using AngleSharp.Dom;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace BoosterCreator {
 	internal sealed class BoosterHandler : IDisposable {
@@ -26,7 +27,7 @@ namespace BoosterCreator {
 
 		internal static int GetBotIndex(Bot bot) {
 			//this can be pretty slow and memory-consuming on lage bot farm. Luckily, I don't care about cases with >10 bots
-			List<string> botnames = BoosterHandlers.Keys.ToList<string>();
+			List<string> botnames = [.. BoosterHandlers.Keys];
 			botnames.Sort();
 			int index = botnames.IndexOf(bot.BotName);
 			return 1 + (index >= 0 ? index : botnames.Count);
@@ -61,7 +62,7 @@ namespace BoosterCreator {
 		}
 
 		internal static async Task<string?> CreateBooster(Bot bot, ConcurrentDictionary<uint, DateTime?> gameIDs) {
-			if (!gameIDs.Any()) {
+			if (gameIDs.IsEmpty) {
 				bot.ArchiLogger.LogNullError(null, nameof(gameIDs));
 
 				return null;
@@ -83,7 +84,7 @@ namespace BoosterCreator {
 			uint tradableGooAmount = uint.Parse(gooAmounts[1].Value);
 			uint unTradableGooAmount = uint.Parse(gooAmounts[2].Value);
 
-			IEnumerable<Steam.BoosterInfo>? enumerableBoosters = JsonConvert.DeserializeObject<IEnumerable<Steam.BoosterInfo>>(info.Value);
+			IEnumerable<Steam.BoosterInfo>? enumerableBoosters = JsonSerializer.Deserialize<IEnumerable<Steam.BoosterInfo>>(info.Value);
 			if (enumerableBoosters == null) {
 				bot.ArchiLogger.LogNullError(enumerableBoosters);
 				return Commands.FormatBotResponse(bot, string.Format(Strings.ErrorParsingObject, nameof(enumerableBoosters)));
@@ -121,12 +122,12 @@ namespace BoosterCreator {
 
 						//God, I hate this shit. But for now I have no idea how to predict/enforce correct format.
 
-						List<string> timeFormats = new(){
+						List<string> timeFormats = [
 							"d MMM @ h:mmtt",
 							"MMM d @ h:mmtt",
 							"d MMM, yyyy @ h:mmtt",
 							"MMM d, yyyy @ h:mmtt",
-						};
+						];
 
 						DateTime availableAtTime = DateTime.MinValue;
 						foreach (string timeFormat in timeFormats) {

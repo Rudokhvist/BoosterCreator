@@ -20,6 +20,8 @@ namespace BoosterCreator {
 			};
 		}
 
+		internal static readonly char[] Separator = [','];
+
 		private static async Task<string?> ResponseBooster(Bot bot, EAccess access, string targetGameIDs) {
 			if (string.IsNullOrEmpty(targetGameIDs)) {
 				ASF.ArchiLogger.LogNullError(null, nameof(targetGameIDs));
@@ -35,7 +37,7 @@ namespace BoosterCreator {
 				return FormatBotResponse(bot, Strings.BotNotConnected);
 			}
 
-			string[] gameIDs = targetGameIDs.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+			string[] gameIDs = targetGameIDs.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
 
 			if (gameIDs.Length == 0) {
 				return FormatBotResponse(bot, string.Format(Strings.ErrorIsEmpty, nameof(gameIDs)));
