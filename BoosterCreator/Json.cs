@@ -9,7 +9,7 @@ namespace BoosterCreator {
 			[JsonInclude]
 			[JsonPropertyName("success")]
 			[JsonRequired]
-			public readonly EResult Result;
+			public EResult Result { get; private init; }
 
 			[JsonConstructor]
 			public EResultResponse() { }
@@ -19,34 +19,32 @@ namespace BoosterCreator {
 			[JsonInclude]
 			[JsonPropertyName("appid")]
 			[JsonRequired]
-			internal readonly uint AppID;
+			internal uint AppID { get; private init; }
 
 			[JsonInclude]
 			[JsonPropertyName("name")]
 			[JsonRequired]
-			internal readonly string Name;
+			internal string Name { get; private init; }
 
 			[JsonInclude]
 			[JsonPropertyName("series")]
 			[JsonRequired]
-			internal readonly uint Series;
+			internal uint Series { get; private init; }
 
 			[JsonInclude]
 			[JsonPropertyName("price")]
 			[JsonRequired]
-			internal readonly uint Price;
+			internal uint Price { get; private init; }
 
 			[JsonInclude]
 			[JsonPropertyName("unavailable")]
 			[JsonRequired]
-			[JsonDisallowNull]
-			internal readonly bool Unavailable;
+			internal bool Unavailable { get; private init; }
 
 			[JsonInclude]
 			[JsonPropertyName("available_at_time")]
 			[JsonRequired]
-			[JsonDisallowNull]
-			internal readonly string AvailableAtTime;
+			internal string AvailableAtTime { get; private init; }
 
 			[JsonConstructor]
 			private BoosterInfo() {
@@ -60,22 +58,22 @@ namespace BoosterCreator {
 			[JsonInclude]
 			[JsonPropertyName("goo_amount")]
 			[JsonRequired]
-			internal readonly uint GooAmount;
+			internal uint GooAmount { get; private init; }
 
 			[JsonInclude]
 			[JsonPropertyName("tradable_goo_amount")]
 			[JsonRequired]
-			internal readonly uint TradableGooAmount;
+			internal uint TradableGooAmount { get; private init; }
 
 			[JsonInclude]
 			[JsonPropertyName("untradable_goo_amount")]
 			[JsonRequired]
-			internal readonly uint UntradableGooAmount;
+			internal uint UntradableGooAmount { get; private init; }
 
 			[JsonInclude]
 			[JsonPropertyName("purchase_result")]
 			[JsonDisallowNull]
-			internal readonly EResultResponse Result;
+			internal EResultResponse Result { get; private init; }
 
 			[JsonConstructor]
 			private BoostersResponse() => Result = new EResultResponse();

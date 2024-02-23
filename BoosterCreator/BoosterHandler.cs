@@ -14,6 +14,7 @@ using JetBrains.Annotations;
 using AngleSharp.Dom;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using ArchiSteamFarm.Helpers.Json;
 
 namespace BoosterCreator {
 	internal sealed class BoosterHandler : IDisposable {
@@ -84,7 +85,7 @@ namespace BoosterCreator {
 			uint tradableGooAmount = uint.Parse(gooAmounts[1].Value);
 			uint unTradableGooAmount = uint.Parse(gooAmounts[2].Value);
 
-			IEnumerable<Steam.BoosterInfo>? enumerableBoosters = JsonSerializer.Deserialize<IEnumerable<Steam.BoosterInfo>>(info.Value);
+			IEnumerable<Steam.BoosterInfo>? enumerableBoosters = info.Value.ToJsonObject<IEnumerable<Steam.BoosterInfo>>();
 			if (enumerableBoosters == null) {
 				bot.ArchiLogger.LogNullError(enumerableBoosters);
 				return Commands.FormatBotResponse(bot, string.Format(Strings.ErrorParsingObject, nameof(enumerableBoosters)));
