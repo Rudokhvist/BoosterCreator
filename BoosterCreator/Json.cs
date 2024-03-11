@@ -2,9 +2,9 @@
 using System.Text.Json.Serialization;
 using ArchiSteamFarm.Helpers.Json;
 using SteamKit2;
-#pragma warning disable 649
+
 namespace BoosterCreator {
-	internal static class Steam {
+	internal class Steam {
 		internal class EResultResponse {
 			[JsonInclude]
 			[JsonPropertyName("success")]
@@ -34,20 +34,19 @@ namespace BoosterCreator {
 			[JsonInclude]
 			[JsonPropertyName("price")]
 			[JsonRequired]
-			internal uint Price { get; private init; }
+			internal string Price { get; private init; }
 
 			[JsonInclude]
 			[JsonPropertyName("unavailable")]
-			[JsonRequired]
 			internal bool Unavailable { get; private init; }
 
 			[JsonInclude]
 			[JsonPropertyName("available_at_time")]
-			[JsonRequired]
 			internal string AvailableAtTime { get; private init; }
 
 			[JsonConstructor]
 			private BoosterInfo() {
+				Price = "";
 				Name = "";
 				AvailableAtTime = "";
 			 }
@@ -58,12 +57,12 @@ namespace BoosterCreator {
 			[JsonInclude]
 			[JsonPropertyName("goo_amount")]
 			[JsonRequired]
-			internal uint GooAmount { get; private init; }
+			internal string? GooAmount { get; private init; }
 
 			[JsonInclude]
 			[JsonPropertyName("tradable_goo_amount")]
 			[JsonRequired]
-			internal uint TradableGooAmount { get; private init; }
+			internal string? TradableGooAmount { get; private init; }
 
 			[JsonInclude]
 			[JsonPropertyName("untradable_goo_amount")]

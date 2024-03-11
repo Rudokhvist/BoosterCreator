@@ -15,6 +15,7 @@ using AngleSharp.Dom;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using ArchiSteamFarm.Helpers.Json;
+using System.Collections.ObjectModel;
 
 namespace BoosterCreator {
 	internal sealed class BoosterHandler : IDisposable {
@@ -85,7 +86,7 @@ namespace BoosterCreator {
 			uint tradableGooAmount = uint.Parse(gooAmounts[1].Value);
 			uint unTradableGooAmount = uint.Parse(gooAmounts[2].Value);
 
-			IEnumerable<Steam.BoosterInfo>? enumerableBoosters = info.Value.ToJsonObject<IEnumerable<Steam.BoosterInfo>>();
+			IEnumerable<Steam.BoosterInfo>? enumerableBoosters = info.Value.ToJsonObject<Collection<Steam.BoosterInfo>>();
 			if (enumerableBoosters == null) {
 				bot.ArchiLogger.LogNullError(enumerableBoosters);
 				return Commands.FormatBotResponse(bot, string.Format(Strings.ErrorParsingObject, nameof(enumerableBoosters)));
@@ -108,7 +109,13 @@ namespace BoosterCreator {
 						continue;
 					}
 					Steam.BoosterInfo bi = boosterInfos[gameID.Key];
-					if (gooAmount < bi.Price) {
+
+					if (!uint.TryParse(bi.Price, out uint gemPrice)) {
+						response.AppendLine(Commands.FormatBotResponse(bot, "Failed to create booster from " + gameID.Key.ToString()));
+						continue;
+					}
+
+					if (gooAmount < gemPrice) {
 						response.AppendLine(Commands.FormatBotResponse(bot, "Not enough gems to create booster from " + gameID.Key.ToString()));
 						//If we have not enough gems - wait 8 hours, just in case gems will be added to account later
 						bot.ArchiLogger.LogGenericInfo(Commands.FormatBotResponse(bot, "Not enough gems to create booster from " + gameID.Key.ToString()));
@@ -154,10 +161,11 @@ namespace BoosterCreator {
 					uint nTp;
 
 					if (unTradableGooAmount > 0) {
-						nTp = tradableGooAmount > bi.Price ? (uint) 1 : 3;
+						nTp = tradableGooAmount > gemPrice ? (uint) 1 : 3;
 					} else {
 						nTp = 2;
 					}
+
 					Steam.BoostersResponse? result = await WebRequest.CreateBooster(bot, bi.AppID, bi.Series, nTp).ConfigureAwait(false);
 					if (result?.Result?.Result != EResult.OK) {
 						response.AppendLine(Commands.FormatBotResponse(bot, "Failed to create booster from " + gameID.Key.ToString()));
@@ -169,8 +177,9 @@ namespace BoosterCreator {
 						}
 						continue;
 					}
-					gooAmount = result.GooAmount;
-					tradableGooAmount = result.TradableGooAmount;
+
+					gooAmount = uint.Parse(result.GooAmount!);
+					tradableGooAmount = uint.Parse(result.TradableGooAmount!);
 					unTradableGooAmount = result.UntradableGooAmount;
 					response.AppendLine(Commands.FormatBotResponse(bot, "Successfuly created booster from " + gameID.Key.ToString()));
 					bot.ArchiLogger.LogGenericInfo(Commands.FormatBotResponse(bot, "Successfuly created booster from " + gameID.Key.ToString()));
