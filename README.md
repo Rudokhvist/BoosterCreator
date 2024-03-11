@@ -7,7 +7,7 @@ This plugin was made by [Outzzz](https://github.com/Outzzz), but after some time
 As title says, aim of this plugin is giving a user an easy way to create booster packs from gems, both by command and automatically.
 
 ## Installation
-- download .zip file from [latest release](https://github.com/Rudokhvist/BoosterCreator/releases/latest), in most cases you need `BoosterCreator.zip`, but if you use ASF-generic-netf.zip (you really need a strong reason to do that) download `BoosterCreator-netf.zip`.
+- download `BoosterCreator.zip` file from [latest release](https://github.com/Rudokhvist/BoosterCreator/releases/latest)
 - unpack downloaded .zip file to `plugins` folder inside your ASF folder.
 - (re)start ASF, you should get a message indicating that plugin loaded successfully. 
 
@@ -17,7 +17,5 @@ To manually create booster just send ASF command `booster <bots> <appids>`, and 
 Example: `booster bot1 730`<br/>
 To automatically create boosters you can add to config of your bot(s) parameter `GamesToBooster`, of type "array of uint". ASF will create boosters from specified games as long as there is enough gems, automatically waiting for cooldowns.<br/>
 Example: `"GamesToBooster": [730, 570],`<br/>
-
-You can get support for this plugin in https://steamcommunity.com/groups/Ryzheplugins (or just use github issues).
 
 ![downloads](https://img.shields.io/github/downloads/Rudokhvist/BoosterCreator/total.svg?style=social)
