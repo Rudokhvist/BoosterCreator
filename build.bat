@@ -21,7 +21,7 @@ if exist out rmdir /Q /S out
 
 rem release generic version
 
-dotnet publish -c "Release" -f "net8.0" -o "out/generic" "/p:LinkDuringPublish=false"
+dotnet publish -c "Release" -o "out/generic" "/p:LinkDuringPublish=false"
 mkdir .\out\%CurrDirName%
 copy .\out\generic\%CurrDirName%.dll .\out\%CurrDirName%
 rem comment section below (downto :zip label) if you don't want to include documentation 
@@ -31,9 +31,8 @@ if ERRORLEVEL 1 (
   copy README.md .\out\%CurrDirName%
   goto zip
 ) else (
-  pandoc  --metadata title="%CurrDirName%" --standalone --columns 2000 -f markdown -t html --self-contained -c .\github-pandoc.css -o .\out\%CurrDirName%\README.html README.md
+  pandoc  --metadata title="%CurrDirName%" -V title="" --standalone --columns 2000 -f gfm -t html --embed-resources -c https://raw.githubusercontent.com/CatPoweredPlugins/github.css/refs/heads/main/github-pandoc.css -o .\out\%CurrDirName%\README.html README.md
 )
 :zip
 7z a -tzip -mx7 .\out\%CurrDirName%.zip .\out\%CurrDirName%
 rmdir /Q /S out\%CurrDirName%
-

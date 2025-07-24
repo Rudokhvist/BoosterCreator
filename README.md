@@ -2,18 +2,18 @@
 
 # Maintenance status
 
-This plugin is not actively developed, and only maintained on last priority basis. I recommend to use [BoosterManager by Citrinate](https://github.com/Citrinate/BoosterManager) instead, if you want to benefit from new features and get support in timely manner. 
+This plugin is not actively developed, and only maintained on last priority basis. I recommend to use [BoosterManager by Citrinate](https://github.com/Citrinate/BoosterManager) instead, if you want to benefit from new features and get support in timely manner.
 
 # ATTENTION! This plugin only works with ASF-generic!
 
 # Introduction
-This plugin was made by [Outzzz](https://github.com/Outzzz), but after some time it got removed from github. Luckily I forked it before that, and as it was published under Apache 2.0 license I can continue development of this plugin. I tried to improve it a little, you can check what changes I made to it in git commits history.<br/>
+This plugin was made by [Outzzz](https://github.com/Outzzz), but after some time it got removed from GitHub. Luckily I forked it before that, and as it was published under Apache 2.0 license I can continue development of this plugin. I tried to improve it a little, you can check what changes I made to it in git commits history.<br/>
 As title says, aim of this plugin is giving a user an easy way to create booster packs from gems, both by command and automatically.
 
 ## Installation
 - download `BoosterCreator.zip` file from [latest release](https://github.com/Rudokhvist/BoosterCreator/releases/latest)
 - unpack downloaded .zip file to `plugins` folder inside your ASF folder.
-- (re)start ASF, you should get a message indicating that plugin loaded successfully. 
+- (re)start ASF, you should get a message indicating that plugin loaded successfully.
 
 ## Usage
 There is two ways to create boosters with this plugin: manual and automatic.
