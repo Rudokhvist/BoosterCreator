@@ -1,8 +1,10 @@
-# ASF Booster Creator Plugin
-
-# Maintenance status
+# THIS PLUGIN IS DEPRECATED
 
 This plugin is not actively developed, and only maintained on last priority basis. I recommend to use [BoosterManager by Citrinate](https://github.com/Citrinate/BoosterManager) instead, if you want to benefit from new features and get support in timely manner.
+
+---
+
+# ASF Booster Creator Plugin
 
 # ATTENTION! This plugin only works with ASF-generic!
 
